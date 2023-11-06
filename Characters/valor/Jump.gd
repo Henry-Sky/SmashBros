@@ -11,8 +11,9 @@ func on_enter() -> void:
 # Called every frame when this state is active.
 func on_process(_delta: float) -> void:
 	manageStateShift()
-	if valor.is_on_floor() and is_zero_approx(valor.velocity.x):
-		animation_player.play("idle")
+	if not valor.is_on_floor():
+		animation_player.play("jump")
+
 
 # Called every physics frame when this state is active.
 func on_physics_process(_delta: float) -> void:
@@ -25,9 +26,8 @@ func on_exit() -> void:
 
 
 func manageStateShift():
-	if valor.is_on_floor() and not is_zero_approx(valor.velocity.x):
+	if valor.is_on_floor() and is_zero_approx(valor.velocity.x):
+		change_state("Idle")
+	elif valor.is_on_floor() and not is_zero_approx(valor.velocity.x):
 		change_state("Run")
-	elif not valor.is_on_floor():
-		change_state("Jump")
-	
 
