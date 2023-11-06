@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://brskcxbq3d7ap"]
+[gd_scene load_steps=11 format=3 uid="uid://brskcxbq3d7ap"]
 
 [ext_resource type="Script" path="res://Characters/valor/valor.gd" id="1_2vko7"]
 [ext_resource type="Texture2D" uid="uid://csu2sybdk3a5a" path="res://Characters/valor/valor (1).png" id="1_3xf2p"]
+[ext_resource type="Script" path="res://addons/SimpleStateMechine/scripts/StateManager.gd" id="3_ukis0"]
+[ext_resource type="Script" path="res://Characters/valor/Idle.gd" id="4_q41te"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_edfe7"]
 size = Vector2(9, 30)
@@ -174,9 +176,12 @@ libraries = {
 "": SubResource("AnimationLibrary_bl3og")
 }
 
-[node name="CoyoteTimer" type="Timer" parent="."]
-wait_time = 0.1
-one_shot = true
+[node name="StateManager" type="Node" parent="."]
+script = ExtResource("3_ukis0")
 
-[node name="JumpRequestTimer" type="Timer" parent="."]
-wait_time = 0.1
+[node name="Idle" type="Node" parent="StateManager"]
+script = ExtResource("4_q41te")
+
+[node name="Run" type="Node" parent="StateManager"]
+
+[node name="Jump" type="Node" parent="StateManager"]
